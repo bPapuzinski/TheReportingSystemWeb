@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'reportingSystemWeb';
+
+  public logout() {
+    // this.oauthService.logOut()
+  }
+
+  public get logged() {
+    // return this.oauthService.hasValidAccessToken();
+    return true;
+  }
 }

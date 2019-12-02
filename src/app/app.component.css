@@ -1,0 +1,14 @@
+.toolbar-flex {
+  flex: 1 1 auto;
+}
+
+.mat-menu-content {
+  background-color: #430099
+}
+
+.mat-menu-item {
+  color: white;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
