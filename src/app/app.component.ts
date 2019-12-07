@@ -1,19 +1,30 @@
 import {Component} from '@angular/core';
+import {LoginService} from './service/login.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent{
   title = 'reportingSystemWeb';
+  private roles: string[];
+
+  constructor(private loginService: LoginService) {
+  }
 
   public logout() {
-    // this.oauthService.logOut()
+    console.log(this.loginService.logout());
+    this.loginService.logout();
   }
 
   public get logged() {
-    // return this.oauthService.hasValidAccessToken();
-    return true;
+    console.log(this.loginService.isLoggedIn());
+    return this.loginService.isLoggedIn();
+  }
+
+  public getAuthorities() {
+    this.roles = this.loginService.getAuthorities();
+    return this.roles;
   }
 }

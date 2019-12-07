@@ -1,9 +1,12 @@
 <mat-sidenav-container fullscreen>
   <mat-toolbar color="primary">
     <button mat-button routerLink="">Reporting System Web</button>
-    <button id="report-list-button" mat-button routerLink="/reportList" >Report List</button>
+    <button id="report-list-button" mat-button routerLink="/reportList" *ngIf="getAuthorities().includes('ROLE_WORKER')" >Report List</button>
+    <button id="user-list-button" mat-button routerLink="/users" *ngIf="getAuthorities().includes('ROLE_ADMIN')" >Users List</button>
+    <button id="register-worker-button" mat-button routerLink="/register" *ngIf="getAuthorities().includes('ROLE_ADMIN')" >Report List</button>
     <span class="toolbar-flex"></span>
     <button id="logout-button" mat-button (click)="logout()" *ngIf="logged" align="end">Logout</button>
+    <button id="login-button" mat-button routerLink="/login" *ngIf="!logged" align="end">Login</button>
   </mat-toolbar>
   <mat-card>
     <router-outlet></router-outlet>
