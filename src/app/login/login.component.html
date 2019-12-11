@@ -9,7 +9,7 @@
           <input id="username-input" matInput placeholder="Username" [formControl]="loginForm?.username">
           <mat-error id="username-required" *ngIf="loginForm?.username.hasError('required')">Required field</mat-error>
         </mat-form-field>
-        <mat-icon color="primary" matTooltip="" matTooltipPosition="right">info</mat-icon>
+        <mat-icon color="primary" matTooltip="Username" matTooltipPosition="right">info</mat-icon>
       </div>
 
       <div>
@@ -17,7 +17,7 @@
           <input id="password-input" matInput placeholder="password" [formControl]="loginForm?.password">
           <mat-error id="password-required" *ngIf="loginForm?.password.hasError('required')">Required field</mat-error>
         </mat-form-field>
-        <mat-icon color="primary" matTooltip="" matTooltipPosition="right">info</mat-icon>
+        <mat-icon color="primary" matTooltip="Password" matTooltipPosition="right">info</mat-icon>
       </div>
     </div>
     <mat-card-actions align="center">

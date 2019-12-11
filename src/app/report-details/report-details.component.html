@@ -1,0 +1,105 @@
+<mat-card>
+  <form *ngIf="reportForm">
+    <table class="mat-table">
+      <tr class="mat-row">
+        <td class="mat-cell">Description:</td>
+        <td class="mat-cell">
+          <mat-form-field id="report-description-field">
+            <input id="report-description-input" #description matInput [formControl]="reportForm.description">
+          </mat-form-field>
+          <mat-icon></mat-icon>
+        </td>
+      </tr>
+      <tr class="mat-row">
+        <td class="mat-cell">Id:</td>
+        <td class="mat-cell">
+          <mat-form-field id="report-id-form-field">
+            <input id="report-id-input" #id matInput [formControl]="reportForm.id">
+          </mat-form-field>
+          <mat-icon></mat-icon>
+        </td>
+      </tr>
+
+      <tr class="mat-row">
+        <td class="mat-cell">Street:</td>
+        <td class="mat-cell">
+          <mat-form-field id="report-street-form-field">
+            <input id="report-street-input" #id matInput [formControl]="reportForm.street">
+          </mat-form-field>
+          <mat-icon></mat-icon>
+        </td>
+      </tr>
+
+      <tr class="mat-row">
+        <td class="mat-cell">House Number:</td>
+        <td class="mat-cell">
+          <mat-form-field id="report-houseNumber-form-field">
+            <input id="report-houseNumber-input" #houseNumber matInput [formControl]="reportForm.houseNumber">
+          </mat-form-field>
+          <mat-icon></mat-icon>
+        </td>
+      </tr>
+
+      <tr class="mat-row">
+        <td class="mat-cell">City:</td>
+        <td class="mat-cell">
+          <mat-form-field id="report-city-form-field">
+            <input id="report-city-input" #city matInput [formControl]="reportForm.city">
+          </mat-form-field>
+          <mat-icon></mat-icon>
+        </td>
+      </tr>
+
+      <tr class="mat-row">
+        <td class="mat-cell">Coordinate:</td>
+        <td class="mat-cell">
+          <mat-form-field id="report-coordinate-form-field">
+            <input id="report-coordinate-input" #coordinate matInput [formControl]="reportForm.coordinate">
+          </mat-form-field>
+          <mat-icon></mat-icon>
+        </td>
+      </tr>
+
+      <tr class="mat-row">
+        <td class="mat-cell">Active:</td>
+        <td class="mat-cell">
+          <mat-form-field id="report-active-form-field">
+            <input id="report-active-input" #active matInput [formControl]="reportForm.active">
+          </mat-form-field>
+          <mat-icon></mat-icon>
+        </td>
+      </tr>
+
+      <tr class="mat-row">
+        <td class="mat-cell">Author Id:</td>
+        <td class="mat-cell">
+          <mat-form-field id="report-authorId-form-field">
+            <input id="report-authorId-input" #authorId matInput [formControl]="reportForm.authorId">
+          </mat-form-field>
+          <mat-icon></mat-icon>
+        </td>
+      </tr>
+
+      <tr class="mat-row">
+        <td class="mat-cell">Creation Date:</td>
+        <td class="mat-cell">
+          <mat-form-field id="report-creationDate-form-field">
+            <input id="report-creationDate-input" #creationDate matInput [formControl]="reportForm.creationDate">
+          </mat-form-field>
+          <mat-icon></mat-icon>
+        </td>
+      </tr>
+
+      <tr class="mat-row">
+        <td class="mat-cell">Image:</td>
+        <td class="mat-cell">
+          <mat-form-field id="report-image-form-field">
+            <img [src]="imageSrc"/>
+            <input id="report-image-input" #image matInput [formControl]="reportForm.image">
+          </mat-form-field>
+          <mat-icon></mat-icon>
+        </td>
+      </tr>
+    </table>
+  </form>
+</mat-card>

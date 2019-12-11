@@ -1,0 +1,12 @@
+.mat-column-author {
+  flex: 0;
+  flex-grow: 1;
+}
+.mat-column-context {
+  flex: 0;
+  flex-grow: 7;
+}
+.mat-column-creationDate {
+  flex: 0;
+  flex-grow: 1;
+}

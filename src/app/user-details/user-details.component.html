@@ -1,0 +1,63 @@
+<mat-card>
+  <form *ngIf="userForm">
+    <table class="mat-table">
+      <tr class="mat-row">
+        <td class="mat-cell">Username:</td>
+        <td class="mat-cell">
+          <mat-form-field id="username-field">
+            <input id="username-input" #description matInput [formControl]="userForm.username">
+          </mat-form-field>
+          <mat-icon></mat-icon>
+        </td>
+      </tr>
+      <tr class="mat-row">
+        <td class="mat-cell">Email:</td>
+        <td class="mat-cell">
+          <mat-form-field id="email-form-field">
+            <input id="email-input" #id matInput [formControl]="userForm.email">
+          </mat-form-field>
+          <mat-icon></mat-icon>
+        </td>
+      </tr>
+
+      <tr class="mat-row">
+        <td class="mat-cell">Mobile number:</td>
+        <td class="mat-cell">
+          <mat-form-field id="mobile-number-form-field">
+            <input id="mobile-number-input" #id matInput [formControl]="userForm.mobileNumber">
+          </mat-form-field>
+          <mat-icon></mat-icon>
+        </td>
+      </tr>
+
+      <tr class="mat-row">
+        <td class="mat-cell">Status:</td>
+        <td class="mat-cell">
+          <mat-form-field id="status-form-field">
+            <input id="status-input" #houseNumber matInput [formControl]="userForm.status">
+          </mat-form-field>
+          <mat-icon></mat-icon>
+        </td>
+      </tr>
+
+      <tr class="mat-row">
+        <td class="mat-cell">Roles:</td>
+        <td class="mat-cell">
+          <mat-form-field id="roles-form-field">
+            <mat-select name="rolesSelect" #rolesSelect [formControl]="userForm?.roles" (keydown.enter)="$event.preventDefault()">
+              <mat-option *ngFor="let role of roles" [value]="role.id">
+                {{role.roleName}}
+              </mat-option>
+            </mat-select>
+            <mat-error id="role-required" *ngIf="userForm?.roles.hasError('required')">Required field</mat-error>
+          </mat-form-field>
+          <mat-icon id="edit-role-type" color="primary" style="cursor: pointer;" matSuffix (click)="editField(userForm.roles)" *ngIf="userForm.roles.disabled">edit</mat-icon>
+          <mat-icon id="accept-role-type" color="primary" style="cursor: pointer;" matSuffix (click)="acceptEdit(userForm.roles)" *ngIf="!userForm.roles.disabled && userForm.roles.valid">done</mat-icon>
+          <mat-icon id="cancel-role" color="primary" style="cursor: pointer;" matSuffix (click)="cancelEdit(userForm.roles)" *ngIf="!userForm.roles.disabled">close</mat-icon>
+          <mat-icon color="primary" matTooltip="" matTooltipPosition="right">info
+          </mat-icon>
+        </td>
+      </tr>
+    </table>
+  </form>
+</mat-card>

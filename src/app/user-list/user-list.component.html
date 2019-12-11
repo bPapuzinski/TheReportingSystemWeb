@@ -1,0 +1,45 @@
+<h1>
+  {{title}}
+</h1>
+<div class="grid grid-pad">
+  <mat-form-field class="width300">
+    <input matInput (input)="refreshUsersList($event.target.value)" placeholder="Filter" [matAutocomplete]="auto" [formControl]="filter">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="refreshUsersList($event.option.value)">
+      <mat-option *ngFor="let option of filteredValues | async" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <button mat-icon-button (click)="refreshUsersList()" matTooltip="Refresh" color="primary">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</div>
+<div class="mat-elevation-z0" style="display: flex; flex-direction: column; min-width: 300px;">
+  <mat-table #table [dataSource]="users" matSort>
+    <ng-container matColumnDef="username">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Username</mat-header-cell>
+      <mat-cell id="username-cell" *matCellDef="let element">{{element.username}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Email</mat-header-cell>
+      <mat-cell id="email-cell" *matCellDef="let element">{{element.email}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="active">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Status</mat-header-cell>
+      <mat-cell id="user-active-cell" *matCellDef="let element">{{element.status}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row id="{{row.name}}" *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [cdkDetailRow]="row" [cdkDetailRowTpl]="tpl" (toggleChange)="onToggleChange($event)" (click)="select(row)" [class]="selectedUser.isSelected(row) ? 'highlighted' : ''"></mat-row>
+  </mat-table>
+</div>
+
+<ng-template #tpl let-element>
+  <div class="mat-row" [@detailExpand] style="overflow: hidden">
+    <mat-tab-group>
+      <mat-tab label="Details">
+        <app-user-details [selectedUser]="selectedUser"></app-user-details>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</ng-template>

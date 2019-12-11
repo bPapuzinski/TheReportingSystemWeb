@@ -1,0 +1,36 @@
+<mat-card>
+
+  <mat-table #table [dataSource]="replays">
+    <ng-container matColumnDef="author">
+      <mat-header-cell *matHeaderCellDef> Author</mat-header-cell>
+      <mat-cell id="authors-cell" *matCellDef="let element">{{element.author}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="context">
+      <mat-header-cell *matHeaderCellDef> Context</mat-header-cell>
+      <mat-cell id="context-cell" *matCellDef="let element">{{element.context}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="creationDate">
+      <mat-header-cell *matHeaderCellDef> Creation Date</mat-header-cell>
+      <mat-cell id="creation-date-cell" *matCellDef="let element">{{element.creationDate}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row id="{{row.name}}" *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [cdkDetailRow]="row" [cdkDetailRowTpl]="tpl"></mat-row>
+  </mat-table>
+
+
+  <form [formGroup]="replayForm.formGroup" #formDirective="ngForm">
+    <div style="display: flex; flex-direction: column">
+      <div align="center">
+        <mat-form-field id="context-form-field">
+          <input  id="context-input" matInput placeholder="context" [formControl]="replayForm?.context">
+          <mat-error id="context-required" *ngIf="replayForm?.context.hasError('required')">Required field</mat-error>
+        </mat-form-field>
+        <mat-icon color="primary" matTooltip="Type here comment You want to add to this report" matTooltipPosition="right">info</mat-icon>
+      </div>
+      <mat-card-actions align="center">
+        <button id="send-replay-button" [disabled]="!replayForm.formGroup.valid" mat-raised-button color="primary" (click)="sendReplay(formDirective)">Send</button>
+      </mat-card-actions>
+    </div>
+  </form>
+</mat-card>

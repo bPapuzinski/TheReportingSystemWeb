@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {LoginService} from './service/login.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +11,16 @@ export class AppComponent{
   title = 'reportingSystemWeb';
   private roles: string[];
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService,
+              private router: Router) {
   }
 
   public logout() {
-    console.log(this.loginService.logout());
     this.loginService.logout();
+    this.router.navigateByUrl('');
   }
 
   public get logged() {
-    console.log(this.loginService.isLoggedIn());
     return this.loginService.isLoggedIn();
   }
 

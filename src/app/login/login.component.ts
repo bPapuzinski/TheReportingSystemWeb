@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {LoginService} from '../service/login.service';
 import {FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {LoginRequest} from '../model/login-request';
+import {Router} from '@angular/router';
+import {RegisterWorkerCreationDialog} from '../register-worker/dialog/register-worker-creation.dialog';
+import {MatDialog} from '@angular/material';
+import {LoginDialog} from './dialog/login.dialog';
 
 
 @Component({
@@ -13,7 +17,9 @@ export class LoginComponent implements OnInit {
   title = 'Login';
   loginForm: User;
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService,
+              private router: Router,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -22,10 +28,13 @@ export class LoginComponent implements OnInit {
 
   login(formDirective: FormGroupDirective) {
     this.loginService.login(this.loginForm.initUser()).subscribe(response => {
-      console.log(response);
-      // localStorage.setItem('currentUser', response.);
+      localStorage.setItem('user', response.username);
+      this.router.navigateByUrl('/reportList');
     }, error => {
-      console.log(error);
+      this.dialog.open(LoginDialog, {
+        width: 'auto',
+        data: { info: 'Bad Credentials', title: 'Login failed' }
+      });
     });
   }
 }

@@ -1,0 +1,56 @@
+<h1>
+  {{title}}
+</h1>
+<div class="grid grid-pad">
+  <mat-form-field class="width300">
+    <input matInput (input)="refreshReportList($event.target.value)" placeholder="Filter" [matAutocomplete]="auto" [formControl]="filter">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="refreshReportList($event.option.value)">
+      <mat-option *ngFor="let option of filteredValues | async" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <button mat-icon-button (click)="refreshReportList()" matTooltip="Refresh" color="primary">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</div>
+<div class="mat-elevation-z0" style="display: flex; flex-direction: column; min-width: 300px;">
+  <mat-table #table [dataSource]="reports" matSort>
+    <ng-container matColumnDef="city">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> City</mat-header-cell>
+      <mat-cell id="report-city-cell" *matCellDef="let element">{{element.city}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="creationDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Creation Date</mat-header-cell>
+      <mat-cell id="environment-type-cell" *matCellDef="let element">{{element.creationDate}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="active">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Open</mat-header-cell>
+      <mat-cell id="report-active-cell" *matCellDef="let element">{{element.active}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Action</mat-header-cell>
+      <mat-cell id="report-action-cell" *matCellDef="let element">
+        <button id="close-report-button" *ngIf="element.active" mat-raised-button color="primary" (click)="closeReport(element.id)">Close Report</button>
+        <button id="open-report-button" *ngIf="!element.active" mat-raised-button color="primary" (click)="closeReport(element.id)">Open Report</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row id="{{row.name}}" *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [cdkDetailRow]="row" [cdkDetailRowTpl]="tpl" (toggleChange)="onToggleChange($event)" (click)="select(row)" [class]="selectedReport.isSelected(row) ? 'highlighted' : ''"></mat-row>
+  </mat-table>
+</div>
+
+<ng-template #tpl let-element>
+  <div class="mat-row" [@detailExpand] style="overflow: hidden">
+    <mat-tab-group>
+      <mat-tab label="Details">
+        <app-report-details [selectedReport]="selectedReport"></app-report-details>
+      </mat-tab>
+      <mat-tab label="Replay">
+        <app-replay [selectedReport]="selectedReport"></app-replay>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</ng-template>

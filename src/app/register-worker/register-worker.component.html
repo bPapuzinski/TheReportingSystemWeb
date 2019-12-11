@@ -1,0 +1,45 @@
+<mat-card-content>
+  <h1>
+    {{title}}
+  </h1>
+  <form [formGroup]="registerForm.formGroup" #formDirective="ngForm">
+    <div style="display: flex; flex-direction: column">
+      <div>
+        <mat-form-field id="username-form-field">
+          <input id="username-input" matInput placeholder="Username" [formControl]="registerForm?.username">
+          <mat-error id="username-required" *ngIf="registerForm?.username.hasError('required')">Required field</mat-error>
+          <mat-error id="username-name-taken" *ngIf="registerForm?.username.hasError('notUnique')">Username is already taken</mat-error>
+        </mat-form-field>
+        <mat-icon color="primary" matTooltip="Username" matTooltipPosition="right">info</mat-icon>
+      </div>
+
+      <div>
+        <mat-form-field id="password-form-field">
+          <input id="password-input" matInput placeholder="password" [formControl]="registerForm?.password">
+          <mat-error id="password-required" *ngIf="registerForm?.password.hasError('required')">Required field</mat-error>
+        </mat-form-field>
+        <mat-icon color="primary" matTooltip="Password" matTooltipPosition="right">info</mat-icon>
+      </div>
+
+      <div>
+        <mat-form-field id="email-form-field">
+          <input id="email-input" matInput placeholder="email" [formControl]="registerForm?.email">
+          <mat-error id="email-required" *ngIf="registerForm?.email.hasError('required')">Required field</mat-error>
+          <mat-error id="email-name-taken" *ngIf="registerForm?.email.hasError('notUnique')">Email is already taken</mat-error>
+        </mat-form-field>
+        <mat-icon color="primary" matTooltip="Email" matTooltipPosition="right">info</mat-icon>
+      </div>
+
+      <div>
+        <mat-form-field id="mobile-number-form-field">
+          <input id="mobile-number-input" matInput placeholder="password" [formControl]="registerForm?.mobileNumber">
+          <mat-error id="mobile-number-required" *ngIf="registerForm?.mobileNumber.hasError('required')">Required field</mat-error>
+        </mat-form-field>
+        <mat-icon color="primary" matTooltip="Mobile number" matTooltipPosition="right">info</mat-icon>
+      </div>
+    </div>
+    <mat-card-actions align="center">
+      <button id="login-button" [disabled]="!registerForm.formGroup.valid" mat-raised-button color="primary" (click)="registerWorker(formDirective)">Register</button>
+    </mat-card-actions>
+  </form>
+</mat-card-content>

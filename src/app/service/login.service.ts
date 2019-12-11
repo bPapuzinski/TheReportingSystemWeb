@@ -16,7 +16,6 @@ export class LoginService {
   }
 
   login(loginRequest: LoginRequest): Observable<LoginResponse> {
-    console.log(loginRequest);
     return this.http.post<any>(this.apiURL + '/login', loginRequest, {observe: 'response'}).pipe(
       map(response => {
         localStorage.setItem('token', response.headers.get('authorization'));
@@ -27,6 +26,7 @@ export class LoginService {
 
   public logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
   }
 
   public isLoggedIn() {
