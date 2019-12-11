@@ -1,6 +1,6 @@
 <mat-card>
 
-  <mat-table #table [dataSource]="replays">
+  <mat-table #table [dataSource]="replays" *ngIf="replays.data.length>0">
     <ng-container matColumnDef="author">
       <mat-header-cell *matHeaderCellDef> Author</mat-header-cell>
       <mat-cell id="authors-cell" *matCellDef="let element">{{element.author}}</mat-cell>
