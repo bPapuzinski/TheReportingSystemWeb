@@ -6,6 +6,8 @@ import {UserService} from '../service/user.service';
 import {UserDetails} from '../model/user-details-response';
 import {RolesResponse} from '../model/roles-response';
 import {RoleService} from '../service/role-service';
+import {MatDialog} from '@angular/material';
+import {UserChangeRoleConfirmation} from './dialog/user-change-role-confirmation';
 
 
 @Component({
@@ -22,7 +24,8 @@ export class UserDetailComponent implements OnInit {
   previousFieldValue: number;
 
   constructor(private userService: UserService,
-              private roleService: RoleService) {
+              private roleService: RoleService,
+              private dialog: MatDialog) {
   }
 
   async ngOnInit(): Promise<void> {
@@ -37,8 +40,25 @@ export class UserDetailComponent implements OnInit {
     this.previousFieldValue = field.value;
   }
 
-  acceptEdit(field: FormControl) {
+  async reload() {
+    this.userDetails = await this.userService.getUserDetails(this.selectedUser.selected[0].username);
+    this.userForm = new User(this.userDetails);
+  }
 
+  acceptEdit(field: FormControl) {
+    this.userService.changeUserRole(this.userDetails.username, field.value).subscribe(response => {
+      this.reload();
+    }, error => {
+      this.dialog.open(UserChangeRoleConfirmation, {
+        width: 'auto',
+        data: {
+          info: 'Role has not been changed. ' + error.error.message,
+          title: 'Changing role'
+        }
+      });
+    });
+    this.reload();
+    field.disable();
   }
 
   cancelEdit(field: FormControl) {

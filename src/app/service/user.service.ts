@@ -23,4 +23,8 @@ export class UserService {
   getUserDetails(username: string): Promise<UserDetails> {
     return this.http.get<UserDetails>(this.apiURL + `/user/${username}`, {headers: header}).toPromise();
   }
+
+  changeUserRole(username: string, roleId: number): Observable<UserDetails> {
+    return this.http.put<UserDetails>(this.apiURL + `/user/${username}/role/${roleId}`, null, {headers: header});
+  }
 }

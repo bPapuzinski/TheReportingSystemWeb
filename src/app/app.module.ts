@@ -25,6 +25,7 @@ import {RegisterWorkerCreationDialog} from './register-worker/dialog/register-wo
 import {LoginDialog} from './login/dialog/login.dialog';
 import {UserListComponent} from './user-list/user-list.component';
 import {UserDetailComponent} from './user-details/user-details.component';
+import {UserChangeRoleConfirmation} from './user-details/dialog/user-change-role-confirmation';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {UserDetailComponent} from './user-details/user-details.component';
     UserListComponent,
     UserDetailComponent,
     ReplayCreationDialog,
+    UserChangeRoleConfirmation,
     ReportCloseConfirmactionDialog,
     RegisterWorkerCreationDialog,
     LoginDialog
@@ -69,7 +71,8 @@ import {UserDetailComponent} from './user-details/user-details.component';
     ReplayCreationDialog,
     ReportCloseConfirmactionDialog,
     RegisterWorkerCreationDialog,
-    LoginDialog
+    LoginDialog,
+    UserChangeRoleConfirmation
   ],
   providers: [],
   bootstrap: [AppComponent]
