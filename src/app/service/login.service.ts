@@ -5,18 +5,18 @@ import {Observable} from 'rxjs';
 import {LoginResponse} from '../model/login-response';
 import {map} from 'rxjs/operators';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {apiURL} from './global';
 
 @Injectable({providedIn: 'root'})
 export class LoginService {
 
-  apiURL = 'http://localhost:8080';
   helper = new JwtHelperService();
 
   constructor(private http: HttpClient) {
   }
 
   login(loginRequest: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<any>(this.apiURL + '/login', loginRequest, {observe: 'response'}).pipe(
+    return this.http.post<any>(apiURL + '/login', loginRequest, {observe: 'response'}).pipe(
       map(response => {
         localStorage.setItem('token', response.headers.get('authorization'));
         return response.body;
