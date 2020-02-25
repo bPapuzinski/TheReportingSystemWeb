@@ -32,7 +32,7 @@
 
       <div>
         <mat-form-field id="mobile-number-form-field">
-          <input id="mobile-number-input" matInput placeholder="password" [formControl]="registerForm?.mobileNumber">
+          <input id="mobile-number-input" matInput placeholder="mobile number" [formControl]="registerForm?.mobileNumber">
           <mat-error id="mobile-number-required" *ngIf="registerForm?.mobileNumber.hasError('required')">Required field</mat-error>
         </mat-form-field>
         <mat-icon color="primary" matTooltip="Mobile number" matTooltipPosition="right">info</mat-icon>
